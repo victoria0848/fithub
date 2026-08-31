@@ -1,0 +1,36 @@
+@use '../../styles/globals.scss' as globals;
+
+.navStyle {
+
+
+    height: 7vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background-color: globals.$color-raisin;
+      figure {
+        img {
+            width: 10vw
+        }
+      }
+
+    ul {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+        justify-content: end;
+
+       li {
+        list-style-type: none;
+        a {
+            text-decoration: none;
+            color: white;
+
+            &:hover {
+                background-color: globals.$color-white;
+                color: globals.$color-raisin;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+       } 
+    }
+}

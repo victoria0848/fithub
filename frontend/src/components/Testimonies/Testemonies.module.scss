@@ -1,0 +1,50 @@
+@use "../../globals.scss" as globals;
+
+.testemonies {
+    margin-top: 35vh;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 40vh;
+    h2 {
+        text-align: center;
+        padding: 4px;
+        font-size: 3rem;
+    }
+    section {
+        background-color: globals.$color-lavender;
+
+        p{
+            padding: 16px;
+            width: 70%;
+            margin: auto;
+            height: 25vh;
+        }
+        b {
+            padding-top: 16px;
+            display: block;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+    }
+
+    span {
+        display: block;
+        background-color: globals.$color-rosa;
+        width: 100%;
+        padding: 4px;
+        margin: auto;
+        text-align: center;
+    }
+
+    button {
+    background-color: rgba(0, 0, 0, 0);
+    width: 240px;
+    height: 46px;
+    border: none;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    color: white;
+    }
+}

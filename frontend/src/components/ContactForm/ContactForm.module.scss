@@ -1,0 +1,27 @@
+.contactStyle {
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        label {
+        }
+        span {
+            display: inline-flex;
+            input {
+            width: 80%;
+            margin: auto;
+            height: 42px;
+            align-self: end;
+        }
+        }
+        select {
+            width: 80%;
+        }
+        textarea{
+            width: 80%;
+            margin: auto;
+            height: 120wpx;
+        }
+    }
+}

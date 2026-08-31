@@ -1,0 +1,56 @@
+.staffSectionStyle {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+
+    .staffCard {
+        width: auto;
+        height: 350px;
+        overflow-y: hidden;
+        transition: all 0.4s ease;
+        border: solid 1px black;
+
+    img {
+        margin: auto;
+        width: 180px;
+        object-fit: cover;
+        height: 200px;
+    }
+
+    &:hover{
+        .hidden {
+            background-color: rgba($color: 50, 50, 50, 0.8);
+            animation-play-state: running;
+            animation-name: moveIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease;
+            color: white;
+        }
+    }
+
+    .hidden {
+        opacity: 0;
+    }
+}
+}
+
+.staffHeadLine {
+    text-align: center;
+    padding: 16px;
+}
+
+@keyframes moveIn {
+    0% {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(-100px);
+        opacity: 1;
+    }
+}

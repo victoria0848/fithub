@@ -1,0 +1,33 @@
+$primary-color: #ff6b6b;    
+$text-dark: #2f3542;       
+$light-grey: #a4b0be;      
+$bg-color: #f1f2f6;        
+$white: #ffffff;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e24; 
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100vw;
+  max-width: 430px; 
+  height: 100vh;
+  max-height: 932px;
+  background-color: $white;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  overflow-y: auto; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,17 @@
+.estateCard {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 8px;
+    max-width: 400px;
+    border: solid 1px rgba(30, 30, 30, 0.2);
+    box-shadow: 4px 4px 12px 4px rgba(20, 20, 20, 0.05);
+    border-radius: 8px;
+    margin: 8px;
+    gap: 4px; 
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+}
