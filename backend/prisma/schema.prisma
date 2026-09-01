@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           Int     @id @default(autoincrement())
+  name         String
+  email        String  @unique
+  password     String
+  description  String
+  refreshToken String
+  isActive     Boolean @default(true)
+  imageId      Int
+
+  image        Image   @relation(fields: [imageId], references: [id])
+  teams    Team[]
+  ratings  Rating[]
+  bookings Booking[]
+
+  @@map("users")
+
+}
+
+model Team {
+  id              Int    @id @default(autoincrement())
+  name            String
+  description     String 
+  day             String
+  time            String
+  maxParticipants Int
+  userId          Int
+  imageId         Int
+
+  user     User      @relation(fields: [userId], references: [id])
+  image    Image     @relation(fields: [imageId], references: [id])
+  ratings  Rating[]
+  bookings Booking[]
+
+  @@map("teams")
+}
+
+model Image {
+  id  Int    @id @default(autoincrement())
+  url String
+
+  users User[]
+  teams Team[]
+
+  @@map("images")
+}
+
+model Rating {
+  id       Int @id @default(autoincrement())
+  teamId   Int
+  userId   Int
+  numStars Int
+
+  team Team @relation(fields: [teamId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, teamId])
+  @@map("ratings")
+}
+
+model Booking {
+  id     Int @id @default(autoincrement())
+  userId Int
+  teamId Int
+
+  user User @relation(fields: [userId], references: [id])
+  team Team @relation(fields: [teamId], references: [id])
+
+  @@unique([userId, teamId])
+  @@map("bookings")
+}

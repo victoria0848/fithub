@@ -1,0 +1,6 @@
+"id","name","email","password","description","refreshToken","imageId","isActive"
+1,"Admin","info@webudvikler.dk","password","User Description","1234",1,1
+2,"Hippa Hoppesen","hippa@fithub.dk","password","Hippa is currently working with weigths","1234",5,1
+3,"Lars Løbe","lars@fithub.dk","password","Lars is currently working with weigths","1234",6,1
+4,"Jane Fondy","jane@fithub.dk","password","Jane is currently working with weigths","1234",7,1
+5,"Torben Triceps","torben@fithub.dk","password","Torben is currently working with weigths","1234",8,1
