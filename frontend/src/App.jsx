@@ -8,7 +8,11 @@ import { WorkoutDetailPage } from "./pages/WorkoutDetailPage";
 import { LoginPage } from "./pages/LoginPage";
 import { Signup } from "./pages/Signup";
 import { MySchedulePage } from "./pages/MySchedulePage";
-import { SplashScreen } from "./pages/SplashScreen"; // Ny velkomstskærm
+import { SplashScreen } from "./pages/SplashScreen"; 
+import { Search } from "./pages/Search";
+import { MySchedulePage } from "./pages/MySchedulePage";
+
+
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -31,6 +35,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/my-schedule" element={<MySchedulePage />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </main>
       </BrowserRouter>

@@ -1,9 +1,9 @@
 // src/pages/WorkoutDetailPage.module.scss
-@import '../../globals.scss';
+@use '../../globals.scss';
 
 .detailWrapper {
   width: 100%;
-  background-color: $white;
+  background-color: globals.$white;
 }
 
 .detailContent {
@@ -11,11 +11,10 @@
   flex-direction: column;
 }
 
-// 📸 HERO SEKTION (BILLEDET I TOPPEN)
 .heroSection {
   position: relative;
   width: 100%;
-  height: 380px; // Perfekt højde til herobilledet på en mobilskærm
+  height: 380px;
 
   .heroImage {
     width: 100%;
@@ -26,7 +25,7 @@
   .heroOverlay {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.85)); // Mørk fade i bunden, så teksten kan læses
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
     padding: 30px 20px;
 
     .titleAndButton {
@@ -36,31 +35,11 @@
       gap: 15px;
 
       h1 {
-        color: $white;
+        color: globals.$white;
         font-size: 2.2rem;
         font-weight: 800;
         margin: 0;
         line-height: 1.1;
-        letter-spacing: -0.5px;
-      }
-
-      // ⚪ DEN HVIDE SIGN UP KNAP FRA FIGMA
-      .signUpBtn {
-        background-color: #eaeaea; // Den lysegrå/hvide app-farve fra dit billede
-        color: $text-dark;
-        border: none;
-        padding: 14px 24px;
-        border-radius: 8px; // Lidt afrundet kant som i Figma
-        font-size: 1.05rem;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        white-space: nowrap;
-        transition: transform 0.1s ease;
-
-        &:active {
-          transform: scale(0.95);
-        }
       }
     }
   }
@@ -72,18 +51,16 @@
   padding: 12px 20px;
   font-weight: 600;
   text-align: center;
-  font-size: 0.95rem;
+  margin: 0;
 }
 
-// 📅 SCHEDULE OG TEKST SEKTION
 .infoSection {
   padding: 25px 20px;
 
   h3 {
     font-size: 1.25rem;
-    color: $text-dark;
+    color: globals.$text-dark;
     margin: 0 0 15px 0;
-    font-weight: 700;
   }
 
   .scheduleRow {
@@ -91,11 +68,10 @@
     justify-content: space-between;
     font-size: 1.1rem;
     font-weight: 600;
-    color: $text-dark;
+    color: globals.$text-dark;
     margin-bottom: 15px;
-
-    .day { text-transform: capitalize; }
-    .time { color: $text-dark; font-weight: 700; }
+    
+    .time { font-weight: 700; }
   }
 
   .descriptionText {
@@ -106,15 +82,13 @@
   }
 }
 
-// 👤 TRAINER SEKTIONEN I BUNDEN
 .trainerSection {
   padding: 0 20px 40px 20px;
 
   h3 {
     font-size: 1.25rem;
-    color: $text-dark;
+    color: globals.$text-dark;
     margin: 0 0 15px 0;
-    font-weight: 700;
   }
 
   .trainerCard {
@@ -122,32 +96,20 @@
     gap: 15px;
     align-items: flex-start;
 
-    .trainerAvatar {
+    .avatarWrapper {
+      margin: 0;
       width: 75px;
       height: 75px;
-      object-fit: cover;
-      border-radius: 12px; // Afrundet firkant som på dit billede
-      background-color: #eaeaea;
+      overflow: hidden;
+      border-radius: 12px;
+      
+      img { width: 100%; height: 100%; object-fit: cover; }
     }
 
     .trainerInfo {
       flex: 1;
-
-      h4 {
-        margin: 0 0 5px 0;
-        font-size: 1.1rem;
-        color: $text-dark;
-        font-weight: 700;
-      }
-
-      p {
-        margin: 0;
-        color: #7a7a7a;
-        font-size: 0.88rem;
-        line-height: 1.4;
-      }
+      h4 { margin: 0 0 5px 0; font-size: 1.1rem; color: globals.$text-dark; }
+      p { margin: 0; color: #7a7a7a; font-size: 0.88rem; line-height: 1.4; }
     }
   }
 }
-
-.loading, .error { text-align: center; padding: 60px 20px; font-weight: bold; color: $text-dark; }

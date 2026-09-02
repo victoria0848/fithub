@@ -1,36 +1,135 @@
-@use '../../styles/globals.scss' as globals;
+@use '../../globals.scss';
 
-.navStyle {
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: globals.$white;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: globals.$text-dark;
+    text-decoration: none;
+    text-transform: uppercase;
+    span { color: globals.$primary-color; }
+  }
 
-    height: 7vh;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    background-color: globals.$color-raisin;
-      figure {
-        img {
-            width: 10vw
-        }
-      }
+  .triggerBtn {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: globals.$text-dark;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110; // Lægger sig over overlayet når det åbnes
+  }
+}
 
-    ul {
-        display: flex;
-        gap: 8px;
-        align-items: flex-end;
-        justify-content: end;
+// FULLSCREEN OVERLAY FRA FIGMA
+.menuOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  max-width: 430px;
+  height: 100vh;
+  background-color: globals.$white;
+  z-index: 90;
+  transform: translateY(-100%); 
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-       li {
-        list-style-type: none;
-        a {
-            text-decoration: none;
-            color: white;
+.showMenu {
+  transform: translateY(0);
+}
 
-            &:hover {
-                background-color: globals.$color-white;
-                color: globals.$color-raisin;
-                transition: all 0.3s ease-in-out;
-            }
-        }
-       } 
+.overlayContent {
+  width: 100%;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  text-align: center;
+}
+
+.navLinks {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  a {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: globals.$text-dark;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &.active { color: globals.$primary-color; }
+  }
+}
+
+.loginFormArea {
+  text-align: left;
+  
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: globals.$text-dark;
+    margin: 0 0 20px 0;
+  }
+
+  .inlineForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      background-color: #f1f2f6; 
+      font-size: 1rem;
+      outline: none;
+      box-sizing: border-box;
+
+      &:focus { background-color: globals.$white; border-color: globals.$primary-color; }
     }
+
+    .loginBtn {
+      align-self: flex-end;
+      background-color: #fca386; 
+      color: globals.$white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(252, 163, 134, 0.2);
+
+      &:hover { background-color: globals.$primary-color; }
+    }
+  }
+}
+
+.logoutArea {
+  .logoutLink {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e74c3c;
+    cursor: pointer;
+  }
 }

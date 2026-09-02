@@ -1,0 +1,93 @@
+@use '../../globals.scss';
+
+.scheduleWrapper {
+  width: 100%;
+  background-color: globals.$white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.scheduleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+
+  .backBtn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: globals.$light-grey;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: globals.$text-dark;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .menuIcon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    
+    span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: globals.$text-dark;
+    }
+  }
+}
+
+.listSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.scheduleItem {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  .metaRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: globals.$light-grey;
+    font-weight: 600;
+    margin-bottom: 6px;
+
+    .day {
+      text-transform: capitalize;
+    }
+  }
+
+  .className {
+    font-size: 1.25rem;
+    color: globals.$text-dark;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+}
+
+.noBookings {
+  text-align: center;
+  color: globals.$light-grey;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding: 40px 10px;
+}
+
+.loading {
+  text-align: center;
+  padding: 100px 20px;
+  font-size: 1.1rem;
+  color: globals.$text-dark;
+  font-weight: bold;
+}

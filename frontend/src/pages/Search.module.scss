@@ -1,0 +1,105 @@
+@use '../../globals.scss';
+
+.searchWrapper {
+  padding: 20px;
+  background-color: globals.$white;
+}
+
+.searchHeader {
+  margin-bottom: 30px;
+  h2 { font-size: 2.2rem; color: globals.$text-dark; margin: 0; font-weight: 800; text-align: center; }
+  p { color: globals.$light-grey; font-size: 0.9rem; margin: 15px 0 8px 0; font-weight: 600; }
+
+  .searchBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .searchIcon {
+      position: absolute;
+      left: 15px;
+      color: globals.$light-grey;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 14px 14px 45px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      background-color: #f1f2f6; 
+      font-size: 1rem;
+      outline: none;
+      color: globals.$text-dark;
+
+      &:focus { background-color: globals.$white; border-color: globals.$primary-color; }
+    }
+  }
+}
+
+.popularSection {
+  margin-bottom: 35px;
+  h3 { font-size: 1.35rem; color: globals.$text-dark; margin: 0 0 15px 0; font-weight: 700; }
+}
+
+.classSlider {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  &::-webkit-scrollbar { display: none; }
+
+  .classCard {
+    min-width: 130px;
+    max-width: 130px;
+    text-decoration: none;
+
+    .imgFrame {
+      margin: 0; width: 130px; height: 130px; border-radius: 10px; overflow: hidden;
+      img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    h4 { color: globals.$text-dark; margin: 8px 0 4px 0; font-size: 0.95rem; font-weight: 600; }
+    
+    .barProgress {
+      height: 4px; width: 100%; background-color: #eaeaea; border-radius: 2px; position: relative;
+      &::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 60%; background-color: globals.$primary-color; border-radius: 2px; }
+    }
+  }
+}
+
+// TRÆNER LISTE 
+.trainersSection {
+  h3 { font-size: 1.35rem; color: globals.$text-dark; margin: 0 0 15px 0; font-weight: 700; }
+}
+
+.trainerList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trainerRow {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+
+  .avatar {
+    margin: 0; width: 80px; height: 80px; border-radius: 10px; overflow: hidden; flex-shrink: 0;
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  .trainerMeta {
+    flex: 1;
+    h4 { margin: 0 0 4px 0; color: globals.$text-dark; font-size: 1.05rem; font-weight: 700; }
+    p { margin: 0; color: globals.$light-grey; font-size: 0.82rem; line-height: 1.4; }
+  }
+}
+
+// SØGERESULTATER STYLING
+.resultsList { display: flex; flex-direction: column; gap: 12px; }
+.resultItem {
+  display: flex; align-items: center; gap: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px; text-decoration: none;
+  img { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
+  h4 { margin: 0; color: globals.$text-dark; }
+  p { margin: 3px 0 0 0; color: globals.$light-grey; font-size: 0.85rem; }
+}
