@@ -1,0 +1,23 @@
+@use '../../globals.scss';
+
+.signUpBtn {
+  background-color: #eaeaea; 
+  color: $text-dark;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+
+  &:hover {
+    background-color: $white;
+  }
+
+  &:active {
+    transform: scale(0.95); // Klik-effekt på mobilen
+  }
+}
