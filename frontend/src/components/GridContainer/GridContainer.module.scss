@@ -1,7 +1,8 @@
-.Container {
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+@use '../../globals.scss';
+
+.gridContainer {
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  box-sizing: border-box;
 }
