@@ -1,79 +1,66 @@
+// src/pages/Frontpage.jsx
 import React from "react"; 
 import { useFetch } from "../hooks/useFetch";
 import { NavLink } from "react-router-dom";
-
-import { EstateCard as WorkoutCard } from "../components/ProductCard/ProductCard"; 
+import { WorkoutCard } from "../components/WorkoutCard/WorkoutCard"; 
 import style from "./Frontpage.module.scss";
 
-
 export function Frontpage() {
-
-    //Fetch estate data
+    // Vi henter dine teams/hold direkte fra din live backend
     const { 
         data: teamData, 
         error: teamError, 
         isLoading: teamLoading 
-    } = useFetch(
-        import.meta.env.VITE_PUBLIC_BASE_URL + '/api/teams');
+    } = useFetch('http://localhost:3000/api/teams');
 
-    const {
-     data: reviewData,
-     error: reviewError, 
-     isLoading: reviewLoading
-    } = useFetch(import.meta.env.VITE_PUBLIC_BASE_URL + "/api/reviews");
+    if (teamLoading) return <div className={style.loading}>Indlæser FitHub... </div>;
+    if (teamError) return <div className={style.error}>Kunne ikke hente data.</div>;
 
-    const {
-        data: staffData,
-        isLoading: staffloading,
-        error: staffError,
-    } = useFetch(import.meta.env.VITE_PUBLIC_BASE_URL + "/api/users");
+    // FIKSET: Vi sikrer, at funktionen modtager selve tekststrengen fra .url relationen
+    const getImageUrl = (imageObj) => {
+        const path = imageObj?.url || imageObj; // Tager enten underobjektets url eller rå tekst
+        if (!path || typeof path !== "string") return 'https://placeholder.com';
+        
+        const cleanPath = path.replace('/assets/', '/images/');
+        return `http://localhost:3000${cleanPath}`;
+    };
 
-    const shuffleArray = () => {
-        if (!teamData || !Array.isArray(teamData)) return [];
-        const shuffleData = [...teamData].sort(() => Math.random() - 0.5);
-        return shuffleData;
-    };if (teamLoading || reviewLoading || staffLoading) return <div className={style.loading}>Indlæser FitHub... </div>;
-
-    // Sektion 1: Popular Activities (De første 3 blandede hold)
-    const popularWorkouts = shuffleArray().slice(0, 3);
+    // POPULAR CLASSES: Vi tager udelukkende det FØRSTE hold som det statiske topkort
+    const topWorkout = teamData && teamData.length > 0 ? teamData[0] : null;
 
     return (
         <div className={style.frontpageWrapper}>
-            {/* VELKOMMEN OVERSKRIFT (MOBIL APP LOOK) */}
-            <header className={style.welcomeHeader}>
-                <h2>Hej!</h2>
-                <p>Klar til at træne i dag?</p>
-            </header>
+            
+            {/* SEKTION 1: POPULAR CLASSES (STATISK OG STORT TOPKORT UD FRA FIGMA) */}
+            {topWorkout && (
+                <section className={style.sectionArea}>
+                    <h3 className={style.sectionTitle}>Popular Classes</h3>
+                    <NavLink to={`/workout/${topWorkout.id}`} className={style.staticPopularCard}>
+                        {/* Vi sender hele image-objektet med ind i den nye sikrede funktion */}
+                        <img src={getImageUrl(topWorkout.image)} alt={topWorkout.name} />
+                        <div className={style.cardOverlay}>
+                            <h4>{topWorkout.name}</h4>
+                        </div>
+                    </NavLink>
+                </section>
+            )}
 
-            {/* SEKTION 1: POPULAR ACTIVITIES */}
+            {/* SEKTION 2: CLASSES FOR YOU (VANDRET SLIDER I BUNDEN UD FRA FIGMA) */}
             <section className={style.sectionArea}>
-                <h3>Popular Activities</h3>
-                <div className={style.popularSlider}>
-                    {popularWorkouts.map((item) => (
-                        <NavLink to={`/workout/${item.id}`} key={item.id} className={style.popularCard}>
-                            <img src={item.image?.url || 'https://placeholder.com'} alt={item.name} />
-                            <div className={style.cardOverlay}>
-                                <h4>{item.name}</h4>
-                            </div>
-                        </NavLink>
-                    ))}
-                </div>
-            </section>
-
-            {/* SEKTION 2: ALLE HOLD (GENBRUGER DIT OPRINDELIGE KORT LOOP) */}
-            <section className={style.sectionArea}>
-                <h3>Alle hold</h3>
-                <div className={style.workoutGrid}>
-                    {teamData?.map((item) => (
-                        <WorkoutCard 
-                            key={item.id} 
-                            id={item.id}
-                            title={item.name} // Mapper 'name' over i dit korts 'title' prop
-                            price={`${item.day} kl. ${item.time}`} // Vi genbruger price-feltet til ugedag/tid
-                            image={item.image?.url} // Sender URL'en direkte videre
-                            description={`Maks ${item.maxParticipants} deltagere`} // Genbruger beskrivelsen
-                        />
-                    ))}
+                <h3 className={style.sectionTitle}>Classes for you</h3>
+                <div className={style.sliderContainer}>
+                    <div className={style.classesForYouSlider}>
+                        {teamData?.map((item) => (
+                            <WorkoutCard 
+                                key={item.id} 
+                                id={item.id}
+                                title={item.name} 
+                                price={`${item.day} kl. ${item.time}`} 
+                                image={getImageUrl(item.image)} // Bygger det perfekte statiske link live
+                                description={`Maks ${item.maxParticipants} deltagere`} 
+                            />
+                        ))}
+                    </div>
                 </div>
             </section>
         </div>

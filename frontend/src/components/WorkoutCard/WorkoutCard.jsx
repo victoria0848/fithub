@@ -7,9 +7,12 @@ export function WorkoutCard({ id, title, price, image, description }) {
         <NavLink to={`/workout/${id}`} className={style.cardLink}>
             <article className={style.workoutCard}>
                 
-                <figure className={style.imageFrame}>
-                    <img src={image || 'https://placeholder.com'} alt={title} />
-                </figure>
+            <figure className={style.imageFrame}>
+            <img 
+                src={image} 
+                alt={title} 
+            />
+            </figure>
 
                 <section className={style.cardBody}>
                     <h3>{title}</h3>

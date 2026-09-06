@@ -2,7 +2,7 @@
 
 .signUpBtn {
   background-color: #eaeaea; 
-  color: $text-dark;
+  color: globals.$text-dark;
   border: none;
   padding: 14px 24px;
   border-radius: 8px;
@@ -14,7 +14,7 @@
   transition: transform 0.1s ease, background-color 0.2s ease;
 
   &:hover {
-    background-color: $white;
+    background-color: globals.$white;
   }
 
   &:active {

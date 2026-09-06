@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './SignUpBtn.module.scss';
+import style from '../SignUpBtn/SignUpBotton.module.scss';
 
 export function SignUpBtn({ onClick, text = "Sign up" }) {
     return (

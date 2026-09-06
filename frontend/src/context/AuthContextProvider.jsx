@@ -1,35 +1,30 @@
-import {  useState } from "react";
-import { AuthContext } from "./AuthContext"
-import { useCookies } from "react-cookie";
+import React, { createContext, useState, useEffect } from "react";
 
-export const AuthcontextProvider = ({cildren}) => {
-    const [authToken, setAuthToken] = useState();
-    const [cookies, setCookies, removeCookies] = useCookies();
+export const AuthContext = createContext(null);
 
-    const now = new Date().getTime();
-    const twoHoursFromNow = now + 2 * 60 * 60 * 1000;
-    const expireTime = new Date(twoHoursFromNow);
+export const AuthContextProvider = ({ children }) => {
+    const [authToken, setAuthToken] = useState(() => {
+        return localStorage.getItem("fithub_token") || null;
+    });
 
     useEffect(() => {
         if (authToken) {
-            setCookies("authToken", authToken?.accessToken, {expires: expireTime });
+            const tokenString = authToken?.accessToken || authToken;
+            localStorage.setItem("fithub_token", tokenString);
+        } else {
+            localStorage.removeItem("fithub_token");
         }
-        console.log("Auth token: ", authToken);
-    }, [authToken, setCoookies]);
-
-    if (!authToken) {
-        setAuthToken(cookies?.authToken);
-        console.log("cookies:", cookies?.authToken);
-    }
+        console.log("FitHub Auth Token: ", authToken);
+    }, [authToken]);
 
     function logout() {
-        setAuthToken();
-        removeCookies("authToken");
+        setAuthToken(null);
+        localStorage.removeItem("fithub_token");
     }
 
     return (
-        <AuthcontextProvider value={authToken, setAuthToken, logout}>
+        <AuthContext.Provider value={{ authToken, setAuthToken, logout }}>
             {children}
-        </AuthcontextProvider>
+        </AuthContext.Provider>
     );
 };

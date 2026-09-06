@@ -1,4 +1,4 @@
-@use '../../globals.scss';
+@use '../globals.scss';
 
 .searchWrapper {
   padding: 20px;
@@ -67,7 +67,6 @@
   }
 }
 
-// TRÆNER LISTE 
 .trainersSection {
   h3 { font-size: 1.35rem; color: globals.$text-dark; margin: 0 0 15px 0; font-weight: 700; }
 }

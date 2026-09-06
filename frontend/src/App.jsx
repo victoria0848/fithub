@@ -8,7 +8,7 @@ import { Frontpage } from "./pages/Frontpage";
 import { WorkoutDetailPage } from "./pages/WorkoutDetailPage";
 import { MySchedulePage } from "./pages/MySchedulePage";
 import { Search } from "./pages/Search";
-import { SplashScreen } from "./pages/SplashScreen";
+import { SplashScreen } from "./pages/SplashScreenpage";
 
 
 
@@ -16,6 +16,7 @@ function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   if (showSplash) {
+  // Sender en funktion med som prop (onStart), der sætter showSplash til false
     return <SplashScreen onStart={() => setShowSplash(false)} />;
   }
 

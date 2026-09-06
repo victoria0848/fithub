@@ -1,4 +1,3 @@
-// src/pages/WorkoutDetailPage.jsx
 import React, { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
@@ -13,8 +12,17 @@ export function WorkoutDetailPage() {
     const [bookingStatus, setBookingStatus] = useState("");
 
     const { data: workout, isLoading, error } = useFetch(
-        import.meta.env.VITE_PUBLIC_BASE_URL + "/api/teams/" + id
-    );
+            "http://localhost:3000/api/teams/" + id
+        );
+
+
+    const getImageUrl = (imageObj) => {
+    const path = imageObj?.url || imageObj;
+    if (!path || typeof path !== "string") return 'https://placeholder.com';
+    
+    // Vi har fjernet .replace(), fordi API'et allerede skriver /images/ nu!
+    return `http://localhost:3000${path}`;
+    };
 
     const handleSignUp = async () => {
         if (!authToken) {
@@ -53,8 +61,12 @@ export function WorkoutDetailPage() {
                     
                     {/* SEMANTISK: En header til dit store herobillede og titel */}
                     <header className={style.heroSection}>
-                        <img src={workout.image?.url} alt={workout.name} className={style.heroImage} />
-                        <div className={style.heroOverlay}>
+                     <img 
+  src={getImageUrl(workout.image?.url || workout.image)} 
+  alt={workout.name} 
+  className={style.heroImage} 
+/>
+                     <div className={style.heroOverlay}>
                             <div className={style.titleAndButton}>
                                 <h1>{workout.name}</h1>
                                 <SignUpBtn onClick={handleSignUp} text="Sign up" />
@@ -76,9 +88,13 @@ export function WorkoutDetailPage() {
                     <section className={style.trainerSection}>
                         <h3>Trainer</h3>
                         <div className={style.trainerCard}>
-                            {/* SEMANTISK: En figure omkring trænerens profilbillede */}
                             <figure className={style.avatarWrapper}>
-                                <img src={workout.user?.image?.url || 'https://placeholder.com'} alt={workout.user?.name} />
+                                {/* FIKSET: Fjernet ekstern tekst inde i src, og tilføjet .url til træner-billedet */}
+                                <img 
+  src={getImageUrl(workout.user?.image?.url || workout.user?.image)} 
+  alt={workout.user?.name} 
+/>
+
                             </figure>
                             <div className={style.trainerInfo}>
                                 <h4>{workout.user?.name}</h4>
