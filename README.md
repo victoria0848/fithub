@@ -4,6 +4,16 @@ Dette projekt er en fuldt funktionel, mobiloptimeret web-applikation udviklet ti
 
 ---
 
+## 🎨 Component Library (Komponent-bibliotek)
+Applikationen er bygget ud fra princippet om "Atomic Design", hvor brugerfladen er splittet op i atomare, genanvendelige komponenter, hvilket sikrer ensartet styling og minimal kode-gentagelse:
+
+* **`SignUpBtn` (Atom):** En uafhængig, semantisk knap-komponent. Den modtager `onClick` og `text` som props. Styles dynamisk med en hvidlig baggrund og mørk tekst ud fra Figma-kravene.
+* **`WorkoutCard` (Molekyle):** Et genanvendeligt kort, der præsenterer et fitnesshold med billede, holdnavn, tidsplan og deltagerantal. Bruges både på forsiden i slideren og på søgesiden.
+* **`GridContainer` (Organisme):** En strukturel layout-komponent, der tvinger elementer ind i et ensartet, lodret mobil-grid med kontrolleret luft (gap).
+* **`Navigation` (Organisme):** En fuldskærms menu-overlay, der fungerer dynamisk baseret på brugerens login-tilstand (viser login-formular før login, og skifter til personlige links samt logout-knap efter login).
+
+---
+
 ## 📱 Projektets Omfang & Funktionalitet
 
 Applikationen opfylder alle de obligatoriske krav i kravspecifikationen og er struktureret med følgende kernesider:
@@ -26,8 +36,8 @@ Projektet er opbygget som en moderne Fullstack-applikation med en klar adskillel
 * **SASS / SCSS Modules:** Al styling er struktureret semantisk med `@use`-syntaks og CSS Modules for at forhindre global naming-pollution og sikre genanvendelige styling-variabler.
 
 ### Backend & Database:
-* **Node.js / Express:** API-server, der leverer data i JSON-format og håndterer statiske filer.
-* **SQLite & Prisma:** En letvægts, lokal SQL-database, der opretholder relationerne mellem brugere, hold (`teams`), billeder og bookinger.
+* **Node.js / Express:** API-server, der leverer data i JSON-format og håndterer statiske filer på port 3000.
+* **SQLite & Prisma ORM:** SQLite fungerer som den lokale relationelle database, mens Prisma fungerer som en ORM-bro (Object-Relational Mapping), der gør det muligt for serveren at tilgå databasens relationer (mellem brugere, hold, billeder og bookinger) uden rå SQL-kode.
 
 ---
 

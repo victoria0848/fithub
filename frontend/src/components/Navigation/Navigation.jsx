@@ -9,35 +9,43 @@ export function Navigation() {
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-        const username = e.target.username.value;
-        const password = e.target.password.value;
+    e.preventDefault();
+    const username = e.target.username.value;
+    const password = e.target.password.value;
 
-        const bodyJSON = JSON.stringify({ 
-            username: username, 
-            password: password,
+    const bodyJSON = JSON.stringify({ 
+        username: username, 
+        password: password,
+    });
+
+           try {
+        const res = await fetch("http://localhost:3000/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: bodyJSON,
         });
 
-        try {
-            const res = await fetch("http://localhost:3000/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: bodyJSON,
-            });
-
-            const data = await res.json();
-            
-            if (data?.token) { 
-                setAuthToken(data.token);
-                setIsOpen(false); 
-                navigate("/my-schedule");
-            } else {
-                alert("Forkert brugernavn eller adgangskode!");
-            }
-        } catch (err) {
-            console.error("Login fejl:", err);
+        if (!res.ok) {
+            alert("Forkert brugernavn eller adgangskode!s");
+            return;
         }
-    };
+
+        const data = await res.json();
+        
+        const token = data?.token || data?.accessToken || data?.access_token;
+
+        if (token) {
+            setAuthToken(token);
+            setIsOpen(false); // Lukker menuen
+            navigate("/my-schedule"); // Går til skemaet
+        } else {
+            alert("Login lykkedes, men der blev ikke modtaget et token fra API'et.");
+        }
+    } catch (err) {
+        console.error("Login fejl:", err);
+        alert("Der skete en teknisk fejl under login. Tjek terminalen.");
+    }
+};
 
     return (
         <>
