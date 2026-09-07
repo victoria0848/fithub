@@ -1,4 +1,3 @@
-// src/pages/Frontpage.jsx
 import React from "react"; 
 import { useFetch } from "../hooks/useFetch";
 import { NavLink } from "react-router-dom";
@@ -6,7 +5,6 @@ import { WorkoutCard } from "../components/WorkoutCard/WorkoutCard";
 import style from "./Frontpage.module.scss";
 
 export function Frontpage() {
-    // Vi henter dine teams/hold direkte fra din live backend
     const { 
         data: teamData, 
         error: teamError, 
@@ -16,22 +14,20 @@ export function Frontpage() {
     if (teamLoading) return <div className={style.loading}>Indlæser FitHub... </div>;
     if (teamError) return <div className={style.error}>Kunne ikke hente data.</div>;
 
-    // FIKSET: Vi sikrer, at funktionen modtager selve tekststrengen fra .url relationen
     const getImageUrl = (imageObj) => {
-        const path = imageObj?.url || imageObj; // Tager enten underobjektets url eller rå tekst
+        const path = imageObj?.url || imageObj; 
         if (!path || typeof path !== "string") return 'https://placeholder.com';
         
         const cleanPath = path.replace('/assets/', '/images/');
         return `http://localhost:3000${cleanPath}`;
     };
 
-    // POPULAR CLASSES: Vi tager udelukkende det FØRSTE hold som det statiske topkort
     const topWorkout = teamData && teamData.length > 0 ? teamData[0] : null;
 
     return (
         <div className={style.frontpageWrapper}>
             
-            {/* SEKTION 1: POPULAR CLASSES (STATISK OG STORT TOPKORT UD FRA FIGMA) */}
+            {/* SEKTION 1: POPULAR CLASSES */}
             {topWorkout && (
                 <section className={style.sectionArea}>
                     <h3 className={style.sectionTitle}>Popular Classes</h3>
@@ -45,7 +41,7 @@ export function Frontpage() {
                 </section>
             )}
 
-            {/* SEKTION 2: CLASSES FOR YOU (VANDRET SLIDER I BUNDEN UD FRA FIGMA) */}
+            {/* SEKTION 2: CLASSES FOR YOU */}
             <section className={style.sectionArea}>
                 <h3 className={style.sectionTitle}>Classes for you</h3>
                 <div className={style.sliderContainer}>
@@ -56,7 +52,7 @@ export function Frontpage() {
                                 id={item.id}
                                 title={item.name} 
                                 price={`${item.day} kl. ${item.time}`} 
-                                image={getImageUrl(item.image)} // Bygger det perfekte statiske link live
+                                image={getImageUrl(item.image)}
                                 description={`Maks ${item.maxParticipants} deltagere`} 
                             />
                         ))}

@@ -10,34 +10,33 @@ export function MySchedulePage() {
     const navigate = useNavigate();
 
     // Sikkerhed: Hvis brugeren ikke er logget ind, sendes de til loginsiden
-    useEffect(() => {
-        if (!authToken) {
-            navigate("/login");
-        }
-    }, [authToken, navigate]);
+    // src/pages/MySchedulePage.jsx - RET DIT FETCH-KALD TIL DETTE:
 
-    // Henter brugerens profil og tilmeld
-    useEffect(() => {
-        if (authToken) {
-            fetch("http://localhost:3000/api/users", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${authToken}`
-                }
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                setScheduleData(data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.error("Fejl ved hentning af skema:", err);
-                setLoading(false);
-            });
-        }
-    }, [authToken]);
-
-    if (loading) return <div className={style.loading}>Henter dit træningsskema... </div>;
+useEffect(() => {
+    if (authToken) {
+        setLoading(true);
+        
+        // 🌱 FIKSET: Vi kalder det rigtige endpoint /api/bookings, som kun henter DINE tilmeldinger
+        fetch("http://localhost:3000/api/bookings", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${authToken}` // Sender din Bearer-token sikkert med i headeren
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            // Hvis din backend returnerer et array direkte, gemmer vi det. 
+            // Hvis det returnerer et bruger-objekt med .bookings, gemmer vi dét.
+            const bookingsList = Array.isArray(data) ? data : data?.bookings || [];
+            setScheduleData({ bookings: bookingsList });
+            setLoading(false);
+        })
+        .catch((err) => {
+            console.error("Fejl ved hentning af skema:", err);
+            setLoading(false);
+        });
+    }
+}, [authToken]);
 
     return (
         <main className={style.scheduleWrapper}>
